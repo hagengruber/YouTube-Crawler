@@ -4,9 +4,11 @@
 		
 		static private $sUrl;
 		static private $aLinks;
+		static private $count;
 		
-		public function new_video($sUrl) {
+		public function new_video($sUrl, $count) {
 			
+			self::$count = $count;
 			self::$sUrl = self::control_url($sUrl);
 			self::$aLinks = self::get_HTML_code();
 			
@@ -59,12 +61,22 @@
 			
 			$links = explode('"', implode(' ', $aHTML));
 			$aLinks = [];
+			$iCount = 0;
 			
 			for($i = 0; $i != count($links); $i++) {
 				
-				if(strcmp($links[$i], '/watch?v=') == 11)
-					$aLinks[count($aLinks)] = 'youtube.com' . $links[$i];
+				if(strcmp($links[$i], '/watch?v=') == 11) {
 					
+					$aLinks[count($aLinks)] = 'youtube.com' . $links[$i];
+					$iCount++;
+				
+				}
+				
+				if($iCount == self::$count)
+					return $aLinks;
+				
+				
+				
 			}
 			
 			return $aLinks;
