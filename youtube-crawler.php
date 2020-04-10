@@ -48,47 +48,43 @@
 			
 			for($i = 0; $i != count($un_HTML); $i++) {
 				
-				if($bCh != 0) {
+				if(strlen($un_HTML[$i]) > 87) {
 					
-					$aHTML[count($aHTML)] = $un_HTML[$i];
-					
-				} elseif($un_HTML[$i] == '/div>') {
-					
-					$bCh = 1;
-				}
-			
-			}
-			
-			$links = explode('"', implode(' ', $aHTML));
-			$aLinks = [];
-			$iCount = 0;
-			$last = '';
-			
-			for($i = 0; $i != count($links); $i++) {
-				
-				if(strcmp($links[$i], '/watch?v=') == 11) {
-					
-					if($last != 'https://youtube.com' . $links[$i]) {
+					if(strcmp(substr($un_HTML[$i], 0, 87), 'a class="yt-uix-sessionlink yt-uix-tile-link spf-link yt-ui-ellipsis yt-ui-ellipsis-2') == -1) {
 						
-						if(strcmp($links[$i + 1], ' rel=') == 0) {
+						$t = explode('"', $un_HTML[$i]);
+						
+						if(isset($t[1])) {
 							
-							$aLinks[count($aLinks)] = [ 'link' => 'https://youtube.com' . $links[$i], 'name' => substr($links[$i + 3], 1, -16) ];
-							$last = 'youtube.com' . $links[$i];
-							$iCount++;
-							
+							if(strlen($t[1]) == 78) {
+								
+								if($bCh == self::$count)
+									return $aHTML;
+									
+								$b = explode('"', $un_HTML[$i - 21]);
+								
+								for($co = 0; $co != count($b); $co++) {
+									
+									if(strcmp(substr($b[$co], 0, 5), 'https') == 0) {
+										
+										$aHTML[count($aHTML)] = [ 'link' => 'https://youtube.com' . $t[11], 'name' => substr($t[14], 1, strlen($t[14]) - 1), 'thumbnail' => $b[$co] ];
+										$bCh++;
+										
+									}
+									
+								}
+								
+							}
+						
 						}
 						
 					}
-					
 				}
 				
-				if($iCount == self::$count)
-					return $aLinks;
-				
 			}
-			
-			return $aLinks;
-			
+		
+			return $aHTML;
+		
 		}
 		
 	}

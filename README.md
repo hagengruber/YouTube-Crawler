@@ -13,7 +13,13 @@ Die Datei 'youtube-crawler.php' in die PHP-Script einbinden und die Funktion 'ne
 <code> include_once('./YouTube-Crawler/youtube-crawler.php'); </code> <br>
 <code> $y = new ytcrawler; </code> <br>
 <code> $links = $y->new_video('https://www.youtube.com/user/MrSuicideSheep', 10); </code> <br>
-<code> for($i = 0; $i != count($links); $i++) </code> <br>
-<code> echo 'Link: ' . $links[$i]['link'] . '<br>' . 'Name: ' . $links[$i]['name'] . '<br><br>'; </code>
+<code> for($i = 0; $i != count($links); $i++){ </code> <br>
+<code> echo ' </code>
+<code> <a href="' . $links[$i]['link'] . '"> </code>
+<code> <img src="' . $links[$i]['thumbnail'] . '">' . $links[$i]['name'] . ' </code>
+<code> </a> </code>
+<code> <br> </code>
+
+
 <br><br>
 Als Übergabeparameter wird der Link des YouTubers und die Anzahl an Videos übergeben.
