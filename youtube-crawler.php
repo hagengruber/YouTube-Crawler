@@ -68,11 +68,11 @@
 				
 				if(strcmp($links[$i], '/watch?v=') == 11) {
 					
-					if($last != 'youtube.com' . $links[$i]) {
+					if($last != 'https://youtube.com' . $links[$i]) {
 						
 						if(strcmp($links[$i + 1], ' rel=') == 0) {
 							
-							$aLinks[count($aLinks)] = [ 'link' => 'youtube.com' . $links[$i], 'name' => substr($links[$i + 3], 1, -16) ];
+							$aLinks[count($aLinks)] = [ 'link' => 'https://youtube.com' . $links[$i], 'name' => substr($links[$i + 3], 1, -16) ];
 							$last = 'youtube.com' . $links[$i];
 							$iCount++;
 							
@@ -84,8 +84,6 @@
 				
 				if($iCount == self::$count)
 					return $aLinks;
-				
-				
 				
 			}
 			
