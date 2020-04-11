@@ -27,23 +27,23 @@ Mit XMLHttpRequest 'yt_Request' und 'count' per POST an die 'youtube-crawler.php
 Die Daten werden per JSON an die JavaScript-Datei mit dem Status '200 OK' zurückgesendet.<br>
 <b> Da das Script asynchron mit dem Laden der Website läuft, wird die Performance dadurch nicht beeinträchtigt </b>
 
-<code> &lt;script&gt; </code>
-<code> var request = new XMLHttpRequest; </code>
-<code> var data = new FormData(); </code>
-<code> data.append('yt_Request', 'https://www.youtube.com/user/MrSuicideSheep'); </code>
-<code> data.append('count', 5); </code>
-<code> request.addEventListener('load', function(event) { </code>
-<code> var jsonData = JSON.parse(request.responseText); </code>
-<code> for (var i = 0; i < jsonData.length; i++) { </code>
-<code> var data = jsonData[i]; </code>
-<code> console.log(data.link); </code>
-<code> console.log(data.name); </code>
-<code> console.log(data.thumbnail); </code>
-<code> } </code>
-<code> }); </code>
-<code> request.open('POST', './YouTube-Crawler/youtube-crawler.php'); </code>
-<code> request.send(data); </code>
-<code> &lt;/script&gt; </code>
+<code> &lt;script&gt; </code> <br>
+<code> var request = new XMLHttpRequest; </code> <br>
+<code> var data = new FormData(); </code> <br>
+<code> data.append('yt_Request', 'https://www.youtube.com/user/MrSuicideSheep'); </code> <br>
+<code> data.append('count', 5); </code> <br>
+<code> request.addEventListener('load', function(event) { </code> <br>
+<code> var jsonData = JSON.parse(request.responseText); </code> <br>
+<code> for (var i = 0; i < jsonData.length; i++) { </code> <br>
+<code> var data = jsonData[i]; </code> <br>
+<code> console.log(data.link); </code> <br>
+<code> console.log(data.name); </code> <br>
+<code> console.log(data.thumbnail); </code> <br>
+<code> } </code> <br>
+<code> }); </code> <br>
+<code> request.open('POST', './YouTube-Crawler/youtube-crawler.php'); </code> <br>
+<code> request.send(data); </code> <br>
+<code> &lt;/script&gt; </code> <br>
 
 
 <br><br>
