@@ -27,7 +27,7 @@ Die Datei 'youtube-crawler.php' in die PHP-Script einbinden und die Funktion 'ne
 ## Installation - Als Ajax-Schnittstelle verwenden
 
 Mit XMLHttpRequest 'yt_Request' und 'count' als FormData() per POST an die 'youtube-crawler.php' senden. <br>
-Die Daten werden per JSON an die JavaScript-Datei mit dem Status '200 OK' zurückgesendet.<br>
+Die Daten werden als JSON-Array an die JavaScript-Datei mit dem Status '200 OK' zurückgesendet.<br>
 <b> Da das Script asynchron mit dem Laden der Website läuft, wird die Performance dadurch nicht beeinträchtigt </b>
 
 <code> &lt;script&gt; </code> <br> <br>
