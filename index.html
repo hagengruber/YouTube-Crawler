@@ -12,6 +12,7 @@
 		<!-- End Jekyll SEO tag -->
 
 		<script src="./githubpage/js/scroll.js" defer=""> </script>
+		<script src="./githubpage/js/scroll_to_id.js" defer=""> </script>
 		<script src="./githubpage/js/cap.js" defer=""> </script>
 		<script src="./githubpage/js/load.js" defer=""> </script>
 
@@ -52,7 +53,8 @@
 			
 			<ul>
 				
-				<li> ... </li>
+				<li> gibt den Namen, Link und das Thumbnail von neuen YouTube-Videos zurück </li>
+				<li> unterstützt sowohl das einbinden in eine PHP-Datei, als auch die Kommunikation mit JavaScript über Ajax </li>
 				
 			</ul>
 
@@ -62,9 +64,79 @@
 			
 			<ul>
 				
-				<li> ... </li>
+				<li> lediglich eine Internetverbindung </li>
 				
 			</ul>
+
+			<h1> Installation und Verwendung </h1>
+			
+				<p> Den YouTube-Crawler kann man auf <b> zwei verschiedene Weisen </b> verwenden: </p>
+				
+				<ul>
+					
+					<li><a href="javascript:;" id="gotoinclude" onclick="scroll_to('include')"> Als <b> zusätzliches Script </b> im PHP-Projekt </a></li>
+					<li><a href="javascript:;" id="gotoajax" onclick="scroll_to('ajax')"> Als <b> Ajax-Schnittstelle </b> </a></li>
+					
+				</ul>
+				
+				<h2 id="include"> In PHP-Datei einbinden </h2>
+				<p> Die Datei 'youtube-crawler.php' in die PHP-Script einbinden und die Funktion 'new_video' aufrufen. </p>
+				Als Übergabeparameter wird der Link des YouTubers und die Anzahl an Videos übergeben.
+				<p> <b> Diese Methode belastet die Performance der Website enorm </b> </p>
+
+				<div class="code">
+					
+					<p> &lt;?php </p>
+					
+						<p style="text-indent: 30px;"> include_once('./YouTube-Crawler/youtube-crawler.php'); </p>
+						
+						<p style="text-indent: 30px;"> $y = new ytcrawler; </p>
+						
+						<p style="text-indent: 30px;"> $data = $y->new_video('https://www.youtube.com/user/MrSuicideSheep', 10); </p>
+						
+						<p style="text-indent: 30px;"> for($i = 0; $i != count($data); $i++) <br>
+							<div style="text-indent: 60px;"> echo ' &lt;a href="' . $data[$i]['link'] . '"&gt; &lt;img src="' . $data[$i]['thumbnail'] . '"&gt;' . $data[$i]['name'] . ' &lt;/a&gt; &lt;br&gt; '; </div> </p>
+					
+					?&gt;
+					
+				</div>
+				
+				<h2 class="h2" id="ajax"> Als Ajax-Schnittstelle (Empfohlen) </h2>
+				<p> Mit XMLHttpRequest 'yt_Request' (mit dem Inhalt des Links) und 'count' (Anzahl der Videos) als FormData() per POST an die 'youtube-crawler.php' Datei senden. </p>
+				Die Daten werden als JSON-Array an die JavaScript-Datei mit dem Status <a href="https://http.cat/200" target="_blank" title="HTTP Cats">'200 OK'</a> zurückgesendet.
+				<p><b> Da das Script asynchron mit dem Laden der Website läuft, wird die Performance dadurch nicht beeinträchtigt </b></p>
+
+				<div class="code">
+
+					<p> &lt;script&gt; </p>
+
+						<p style="text-indent: 30px;"> var request = new XMLHttpRequest; </p>
+
+						<p style="text-indent: 30px;"> var data = new FormData(); </p>
+						<p style="text-indent: 30px;"> data.append('yt_Request', 'https://www.youtube.com/user/MrSuicideSheep'); </p>
+						<p style="text-indent: 30px;"> data.append('count', 5); </p>
+
+						<p style="text-indent: 30px;"> request.addEventListener('load', function(event) { </p>
+
+							<p style="text-indent: 60px;"> var jsonData = JSON.parse(request.responseText); </p>
+
+							<p style="text-indent: 60px;"> for (var i = 0; i &lt; jsonData.length; i++) { </p>
+
+							<p style="text-indent: 90px;"> var data = jsonData[i]; </p>
+							<p style="text-indent: 90px;"> console.log(data.link); <br>
+							<div style="text-indent: 90px;"> console.log(data.name); </div> <br>
+							<div style="text-indent: 90px;"> console.log(data.thumbnail); </div> </p>
+
+						<p style="text-indent: 60px;"> } </p>
+
+						<p style="text-indent: 60px;"> }); </p>
+
+						<p style="text-indent: 60px;"> request.open('POST', './YouTube-Crawler/youtube-crawler.php'); </p>
+						<p style="text-indent: 60px;"> request.send(data); </p>
+
+					<p> &lt;/script&gt; </p>
+					
+				</div>
 
 			<h1> Live Demo </h1>
 
