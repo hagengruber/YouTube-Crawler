@@ -45,7 +45,7 @@ Die Daten werden als JSON-Array an die JavaScript-Datei mit dem Status '200 OK' 
 <code> } </code> <br> <br>
 <code> }); </code> <br> <br>
 <code> request.open('POST', './YouTube-Crawler/youtube-crawler.php'); </code> <br>
-<code> request.send(data); </code> <br>
+<code> request.send(data); </code> <br> <br>
 <code> &lt;/script&gt; </code> <br>
 
 
