@@ -6,9 +6,10 @@ PHP-Klasse, die eine bestimmte Anzahl an neu erschienenen Videos eines YouTubers
 
 Der YouTube-Crawler benötigt, abgesehen von einer Internetverbindung, <b>keine</b> zusätzlichen Software.
 
-## Installation
+## Installation - In PHP Datei einbinden
 
-Die Datei 'youtube-crawler.php' in die PHP-Script einbinden und die Funktion 'new_video' aufrufen:
+Die Datei 'youtube-crawler.php' in die PHP-Script einbinden und die Funktion 'new_video' aufrufen. <br>
+<b> Diese Methode belastet die Performance der Website enorm </b>
 
 <code> include_once('./YouTube-Crawler/youtube-crawler.php'); </code> <br>
 <code> $y = new ytcrawler; </code> <br>
@@ -19,6 +20,30 @@ Die Datei 'youtube-crawler.php' in die PHP-Script einbinden und die Funktion 'ne
 <code> &lt;img src="' . $links[$i]['thumbnail'] . '"&gt;' . $links[$i]['name'] . ' </code>
 <code> &lt;/a&gt; </code>
 <code> &lt;br&gt; </code>
+
+## Installation - Als Ajax-Schnittstelle verwenden
+
+Mit XMLHttpRequest 'yt_Request' und 'count' per POST an die 'youtube-crawler.php' senden. <br>
+Die Daten werden per JSON an die JavaScript-Datei mit dem Status '200 OK' zurückgesendet.<br>
+<b> Da das Script asynchron mit dem Laden der Website läuft, wird die Performance dadurch nicht beeinträchtigt </b>
+
+<code> &lt;script&gt; </code>
+<code> var request = new XMLHttpRequest; </code>
+<code> var data = new FormData(); </code>
+<code> data.append('yt_Request', 'https://www.youtube.com/user/MrSuicideSheep'); </code>
+<code> data.append('count', 5); </code>
+<code> request.addEventListener('load', function(event) { </code>
+<code> var jsonData = JSON.parse(request.responseText); </code>
+<code> for (var i = 0; i < jsonData.length; i++) { </code>
+<code> var data = jsonData[i]; </code>
+<code> console.log(data.link); </code>
+<code> console.log(data.name); </code>
+<code> console.log(data.thumbnail); </code>
+<code> } </code>
+<code> }); </code>
+<code> request.open('POST', './YouTube-Crawler/youtube-crawler.php'); </code>
+<code> request.send(data); </code>
+<code> &lt;/script&gt; </code>
 
 
 <br><br>
