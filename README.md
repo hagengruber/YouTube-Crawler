@@ -20,7 +20,7 @@ Die Datei 'youtube-crawler.php' in die PHP-Script einbinden und die Funktion 'ne
 <code> &lt;img src="' . $links[$i]['thumbnail'] . '"&gt;' . $links[$i]['name'] . ' </code>
 <code> &lt;/a&gt; </code>
 <code> &lt;br&gt; </code> <br>
-<code> ; </code> <br>
+<code> '; </code> <br>
 <code> } </code>
 
 
