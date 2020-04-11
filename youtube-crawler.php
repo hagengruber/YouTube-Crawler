@@ -1,5 +1,14 @@
 <?php
 
+	if(isset($_POST['yt_Request'])) {
+		
+		header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
+		
+		$yt_Req = new ytcrawler;
+		echo json_encode($yt_Req->new_video($_POST['yt_Request'], $_POST['count']));
+		
+	}
+
 	class ytcrawler {
 		
 		static private $sUrl;
