@@ -15,12 +15,12 @@ Die Datei 'youtube-crawler.php' in die PHP-Script einbinden und die Funktion 'ne
 <code> $y = new ytcrawler; </code> <br>
 <code> $links = $y->new_video('https://www.youtube.com/user/MrSuicideSheep', 10); </code> <br>
 <code> for($i = 0; $i != count($links); $i++){ </code> <br>
-<code> echo ' </code>
+<code> echo ' </code> <br>
 <code> &lt;a href="' . $links[$i]['link'] . '"> </code>
 <code> &lt;img src="' . $links[$i]['thumbnail'] . '"&gt;' . $links[$i]['name'] . ' </code>
 <code> &lt;/a&gt; </code>
-<code> &lt;br&gt; </code>
-<code> ; </code>
+<code> &lt;br&gt; </code> <br>
+<code> ; </code> <br>
 <code> } </code>
 
 
