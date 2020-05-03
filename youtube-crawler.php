@@ -1,5 +1,5 @@
 <?php
-test
+
 	if(isset($_POST['yt_Request'])) {
 		
 		header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
